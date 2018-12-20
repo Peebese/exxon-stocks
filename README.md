@@ -24,7 +24,7 @@ The database migration and csv import will happen automatically after you run Co
 
 1) copy .env.example to .env
 2) add database config details in .env
-3) run `$ Composer Install`
+3) run `$ composer install`
 
 Accepted Currencies: GBP, USD, EUR, JPY
 
