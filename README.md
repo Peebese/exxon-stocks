@@ -8,10 +8,10 @@ PHP 7.1 is required
 PHPUnit is required to run tests
 
 API endpoint:
- *** Get Closing Stock Price Report of a given date range **
+ 
   /api/v1/closing-prices-report/{from-date}/{to-date}/{currency-code}
   
- ** Get Closing Stock Prices of a given date range **
+ 
   /api/v1/closing-prices/{from-date}/{to-date}/{currency-code}
   
  ** Example **
