@@ -3,6 +3,7 @@
          backupStaticAttributes="false"
          bootstrap="bootstrap/app.php"
          colors="true"
+         cacheTokens="false"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"

@@ -57,7 +57,7 @@ class CurrencyStockConverter implements CurrencyStockConverterInterface
         return array_map($returnArray, $stocks);
     }
 
-    public function convertSingleStock(float $stockPrice): float
+    public function convertSingleStock(float $stockPrice) : float
     {
         $convertedPrice = ($stockPrice * $this->currencyRate);
         return self::roundNearest2Dec($convertedPrice);

@@ -6,8 +6,6 @@ use App\Helpers\ApiClient\ApiClientService;
 
 class DummyApiClientService extends ApiClientService
 {
-
-
     public function retrieveCurrencyRates() : string
     {
 
