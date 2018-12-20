@@ -34,7 +34,8 @@ class ClosingPricesController extends Controller
         if (empty($resultsArr->count())) {
             return response()->json(
                 [
-                    'success' => 404,
+                    'success' => false,
+                    'status' => 404,
                     'message' => 'No results for date range: '. $dateFrom .' - ' . $dateTo
                 ]
             );
@@ -45,7 +46,8 @@ class ClosingPricesController extends Controller
 
         return response()->json(
             [
-                'success' => 200,
+                'success' => true,
+                'status' => 200,
                 'stocks' => [
                     'currency' => $converter->currency,
                     'closing_stock' => $convertedStocks
@@ -66,7 +68,8 @@ class ClosingPricesController extends Controller
         if (empty($resultsArr->count())) {
             return response()->json(
                 [
-                    'success' => 404,
+                    'success' => false,
+                    'status' => 404,
                     'message' => 'No results for date range: '. $dateFrom .' - ' . $dateTo
                 ]
             );
@@ -77,7 +80,8 @@ class ClosingPricesController extends Controller
 
             return response()->json(
                 [
-                    'success' => 200,
+                    'success' => true,
+                    'status' => 200,
                     'stocks' => [
                         'currency' => $converter->currency,
                         'report' => $stockReport
