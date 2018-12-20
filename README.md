@@ -8,13 +8,13 @@ PHP 7.1 is required
 PHPUnit is required to run tests
 
 API endpoint:
- - Get Closing Stock Price Report of a given date range
+ *** Get Closing Stock Price Report of a given date range **
   /api/v1/closing-prices-report/{from-date}/{to-date}/{currency-code}
   
- - Get Closing Stock Prices of a given date range
+ ** Get Closing Stock Prices of a given date range **
   /api/v1/closing-prices/{from-date}/{to-date}/{currency-code}
   
- - Example
+ ** Example **
   localhost:8000/api/v1/closing-prices/2000-03-03/2000-04-09/usd
 
 # Instructions
@@ -26,4 +26,5 @@ The database migration and csv import will happen automatically after you run Co
 2) add database config details in .env
 3) run `$ Composer Install`
 
+Accepted Currencies: GBP, USD, EUR, JPY
 
