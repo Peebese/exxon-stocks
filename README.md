@@ -20,7 +20,7 @@ API endpoint:
 # Instructions
 
 Note: You will need a database configuired, this allows the app in import the data from the csv to the database
-The database migration and csv import will happen automatically after you run Composer Install. ** You Need to update the `.env` with our database configuration in order for the migration and input to work. 
+The database migration and csv import will happen automatically after you run Composer Install. ** You Need to update the `.env` with your database configuration in order for the migration and import to work. 
 
 1) copy .env.example to .env
 2) add database config details in .env
