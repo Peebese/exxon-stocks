@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: PhilipB
- * Date: 2018-12-19
- * Time: 19:44
- */
+
 
 namespace App\Helpers\Stocks;
 
@@ -19,7 +14,7 @@ class CurrencyStockConverter implements CurrencyStockConverterInterface
     /**
      * @var string
      */
-    private $currency;
+    public $currency;
 
     /**
      * @var float

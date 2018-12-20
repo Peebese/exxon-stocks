@@ -32,13 +32,25 @@ class ClosingPricesController extends Controller
         $resultsArr = StockPrices::getCollection($dateFrom, $dateTo);
 
         if (empty($resultsArr->count())) {
-            return response()->json('No results for date range: '. $dateFrom .' - ' . $dateTo);
+            return response()->json(
+                [
+                    'success' => 404,
+                    'message' => 'No results for date range: '. $dateFrom .' - ' . $dateTo
+                ]
+            );
         }
 
         $converter = new CurrencyStockConverter($this->apiClient,$currency);
         $convertedStocks = $converter->convertStocks($resultsArr->toArray());
 
-        return response()->json($convertedStocks);
+        return response()->json(
+            [
+                'success' => 200,
+                'stocks' => [
+                    'currency' => $converter->currency,
+                    'closing_stock' => $convertedStocks
+                ]
+            ]);
     }
 
     /**
@@ -47,17 +59,29 @@ class ClosingPricesController extends Controller
      * @param string $dateTo
      * @return string
      */
-    public function ShowClosingPricesReport(string $currency, string $dateFrom, string $dateTo) : string
+    public function ShowClosingPricesReport(string $currency, string $dateFrom, string $dateTo)
     {
         $resultsArr = StockPrices::getCollection($dateFrom, $dateTo);
 
         if (empty($resultsArr->count())) {
-            return response()->json('No results for date range: '. $dateFrom .' - ' . $dateTo)->content();
+            return response()->json(
+                [
+                    'success' => 404,
+                    'message' => 'No results for date range: '. $dateFrom .' - ' . $dateTo
+                ]
+            );
         }
 
         $converter = new CurrencyStockConverter($this->apiClient, $currency);
         $stockReport = StockPrices::formatCollectionReport($resultsArr, $converter);
 
-        return response()->json($stockReport)->content();
+            return response()->json(
+                [
+                    'success' => 200,
+                    'stocks' => [
+                        'currency' => $converter->currency,
+                        'report' => $stockReport
+                    ]
+                ]);
     }
 }
