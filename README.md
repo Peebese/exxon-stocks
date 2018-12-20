@@ -14,7 +14,7 @@ API endpoint:
  
   /api/v1/closing-prices/{from-date}/{to-date}/{currency-code}
   
- ** Example **
+ ** Example ** \
   localhost:8000/api/v1/closing-prices/2000-03-03/2000-04-09/usd
 
 # Instructions
