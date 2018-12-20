@@ -105,6 +105,7 @@ class StockPrices extends Model
         $lowest = $resultsArr->sortBy('closing_price')->first();
         $highest = $resultsArr->sortBy('closing_price')->last();
 
+        $avg = $converter->convertSingleStock($avg);
         $highest->closing_price = $converter->convertSingleStock($highest->closing_price);
         $lowest->closing_price = $converter->convertSingleStock($lowest->closing_price);
 
