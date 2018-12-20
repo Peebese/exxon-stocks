@@ -1,4 +1,4 @@
-# Lumen PHP Framework
+# Exxon Stocks
 
 Author: Philip Brown \
 Email: sir.philip.brown@gmail.com
