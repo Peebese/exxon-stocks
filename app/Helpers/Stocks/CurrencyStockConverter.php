@@ -26,7 +26,11 @@ class CurrencyStockConverter implements CurrencyStockConverterInterface
      */
     private $apiClient;
 
-
+    /**
+     * CurrencyStockConverter constructor.
+     * @param ApiClientService $apiClient
+     * @param string $currency
+     */
     public function __construct(
         ApiClientService $apiClient,
         string $currency = self::DEFAULT_CURRENCY
@@ -37,12 +41,24 @@ class CurrencyStockConverter implements CurrencyStockConverterInterface
         $this->currencyRate = $this->retrieveCurrencyRate();
     }
 
+    /**
+     * Checks currency exists in allowed currencies list
+     *
+     * @param $requestCurrency
+     * @return bool
+     */
     private static function validateCurrency($requestCurrency) : bool
     {
         $allowedCurrencies = explode(',', env('CURRENCIES'));
         return in_array(strtoupper($requestCurrency), $allowedCurrencies);
     }
 
+    /**
+     * Convert stock prices in array
+     *
+     * @param array $stocks
+     * @return array
+     */
     public function convertStocks(array $stocks): array
     {
         $this->currencyRate = $this->retrieveCurrencyRate();
@@ -57,18 +73,33 @@ class CurrencyStockConverter implements CurrencyStockConverterInterface
         return array_map($returnArray, $stocks);
     }
 
+    /**
+     * Performs conversion
+     *
+     * @param float $stockPrice
+     * @return float
+     */
     public function convertSingleStock(float $stockPrice) : float
     {
         $convertedPrice = ($stockPrice * $this->currencyRate);
         return self::roundNearest2Dec($convertedPrice);
     }
 
+    /**
+     * Returns currency rate
+     *
+     * @return float
+     */
     private function retrieveCurrencyRate() : float
     {
         $currencies = json_decode($this->apiClient->retrieveCurrencyRates(),true);
         return $currencies['rates'][$this->currency];
     }
 
+    /**
+     * @param float $number
+     * @return float
+     */
     private static function roundNearest2Dec(float $number) : float
     {
         return round($number,2);

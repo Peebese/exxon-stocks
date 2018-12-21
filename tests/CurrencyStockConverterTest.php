@@ -43,10 +43,13 @@ class CurrencyStockConverterTest extends TestCase
         $this->assertTrue(gettype($convertedStock) === 'double');
     }
 
+    /**
+     * Tests converting a collection of stock prices
+     */
     public function testConvertStock()
     {
         $closingStocks = $this->databaseData->getClosingStockPriceData();
         $convertedClosingStocks = $this->currencyStockConverter->convertStocks($closingStocks);
-        $this->assertNotEquals($closingStocks[0]['closing_price'],$convertedClosingStocks[0]['closing_price']);
+        $this->assertNotEquals($closingStocks[0]['closing_price'], $convertedClosingStocks[0]['closing_price']);
     }
 }

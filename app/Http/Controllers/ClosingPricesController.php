@@ -9,11 +9,34 @@ use App\Helpers\ApiClient\ApiClientService;
 class ClosingPricesController extends Controller
 {
     /**
+     * @const bool
+     */
+    const RESPONSE_SUCCESS  = true;
+
+    /**
+     * @const bool
+     */
+    const RESPONSE_FAIL     = false;
+
+    /**
+     * @const int
+     */
+    const STATUS_OK         = 200;
+
+    /**
+     * @const int
+     */
+    const STATUS_NOT_FOUND  = 404;
+
+    /**
      * @var ApiClientService
      */
     private $apiClient;
 
-
+    /**
+     * ClosingPricesController constructor.
+     * @param ApiClientService $apiClient
+     */
     public function __construct(
         ApiClientService $apiClient
     )
@@ -34,8 +57,8 @@ class ClosingPricesController extends Controller
         if (empty($resultsArr->count())) {
             return response()->json(
                 [
-                    'success' => false,
-                    'status' => 404,
+                    'success' => self::RESPONSE_FAIL,
+                    'status' => self::STATUS_NOT_FOUND,
                     'message' => 'No results for date range: '. $dateFrom .' - ' . $dateTo
                 ]
             );
@@ -46,8 +69,8 @@ class ClosingPricesController extends Controller
 
         return response()->json(
             [
-                'success' => true,
-                'status' => 200,
+                'success' => self::RESPONSE_SUCCESS,
+                'status' => self::STATUS_OK,
                 'stocks' => [
                     'currency' => $converter->currency,
                     'closing_stock' => $convertedStocks
@@ -68,8 +91,8 @@ class ClosingPricesController extends Controller
         if (empty($resultsArr->count())) {
             return response()->json(
                 [
-                    'success' => false,
-                    'status' => 404,
+                    'success' => self::RESPONSE_FAIL,
+                    'status' => self::STATUS_NOT_FOUND,
                     'message' => 'No results for date range: '. $dateFrom .' - ' . $dateTo
                 ]
             );
@@ -80,8 +103,8 @@ class ClosingPricesController extends Controller
 
             return response()->json(
                 [
-                    'success' => true,
-                    'status' => 200,
+                    'success' => self::RESPONSE_SUCCESS,
+                    'status' => self::STATUS_OK,
                     'stocks' => [
                         'currency' => $converter->currency,
                         'report' => $stockReport

@@ -10,6 +10,7 @@ use\Illuminate\Support\Facades\Cache;
 
 class ApiClientService
 {
+    const CURRENCY_RATES = 'fixer_currencyself::self::CURRENCY_RATES';
     /**
      * @var string
      */
@@ -33,6 +34,12 @@ class ApiClientService
         $this->currencies   = env('CURRENCIES');
     }
 
+    /**
+     * Calls api, gets currency rates
+     *
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function getCurrencyRates() : string
     {
         $request = new GuzzleRequest(
@@ -52,17 +59,27 @@ class ApiClientService
        return $responseContent;
     }
 
+    /**
+     * Stores currency rates in cache
+     *
+     * @param string $response
+     */
     private function cacheResponse(string $response) : void
     {
-        Cache::put('fixer_currency',$response,60);
+        Cache::put(self::CURRENCY_RATES, $response, env('CACHE_LIFE_MINS'));
     }
 
+    /**
+     * Retrieves rates from check if available
+     *
+     * @return string
+     */
     public function retrieveCurrencyRates() : string
     {
-        if (!Cache::get('fixer_currency')) {
+        if (!Cache::get(self::CURRENCY_RATES)) {
             return $this->getCurrencyRates();
         }
 
-        return Cache::get('fixer_currency');
+        return Cache::get(self::CURRENCY_RATES);
     }
 }
