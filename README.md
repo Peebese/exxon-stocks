@@ -28,3 +28,8 @@ The database migration and csv import will happen automatically after you run Co
 
 Accepted Currencies: GBP, USD, EUR, JPY
 
+# Logic 
+Import : `importClosingPrices` is a console command with handles the import \
+`$ php artisan import:prices` \
+
+Helpers: `ApiClientService` and `CurencyStockConverter`. One controller `ClosingPricesController`. Model `StockPrices`
