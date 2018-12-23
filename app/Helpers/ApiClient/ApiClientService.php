@@ -10,7 +10,7 @@ use\Illuminate\Support\Facades\Cache;
 
 class ApiClientService
 {
-    const CURRENCY_RATES = 'fixer_currencyself::self::CURRENCY_RATES';
+    const CURRENCY_RATES = 'fixer_currency';
     /**
      * @var string
      */

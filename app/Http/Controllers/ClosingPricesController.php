@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Stocks\CurrencyStockConverter;
+
 use App\StockPrices;
 use App\Helpers\ApiClient\ApiClientService;
 
@@ -64,7 +64,7 @@ class ClosingPricesController extends Controller
             );
         }
 
-        $converter = new CurrencyStockConverter($this->apiClient,$currency);
+        $converter = \app()->makeWith('converter', ['currency' => $currency]);
         $convertedStocks = $converter->convertStocks($resultsArr->toArray());
 
         return response()->json(
@@ -98,7 +98,8 @@ class ClosingPricesController extends Controller
             );
         }
 
-        $converter = new CurrencyStockConverter($this->apiClient, $currency);
+        $converter = \app()->makeWith('converter', ['currency' => $currency]);
+
         $stockReport = StockPrices::formatCollectionReport($resultsArr, $converter);
 
             return response()->json(
