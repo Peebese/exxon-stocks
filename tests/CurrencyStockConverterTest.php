@@ -46,7 +46,7 @@ class CurrencyStockConverterTest extends TestCase
     /**
      * Tests converting a collection of stock prices
      */
-    public function testConvertStock()
+    public function testConvertStockCollection()
     {
         $closingStocks = $this->databaseData->getClosingStockPriceData();
         $convertedClosingStocks = $this->currencyStockConverter->convertStocks($closingStocks);

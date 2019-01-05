@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace App;
 
 
@@ -91,8 +89,8 @@ class StockPrices extends Model
 
     public static function getCollection(string $dateFrom, string $dateTo) : EloquentCollection
     {
-        $dateFrom   = self::formatDate($dateFrom);
-        $dateTo     = self::formatDate($dateTo);
+        $dateFrom   = date_format(date_create($dateFrom),'Y-m-d');
+        $dateTo     = date_format(date_create($dateTo),'Y-m-d');
 
         return self::query()
             ->whereBetween('date',[$dateFrom, $dateTo])
@@ -114,10 +112,5 @@ class StockPrices extends Model
             'lowest'  => $lowest,
             'highest' => $highest,
         ];
-    }
-
-    public static function formatDate(string $date) : string
-    {
-        return date('Y-m-d',strtotime($date));
     }
 }
